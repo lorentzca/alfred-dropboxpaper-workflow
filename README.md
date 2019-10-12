@@ -1,6 +1,8 @@
 # Alfred Dropbox Paper Workflow
 
-List and open your Dropbox Paper documents.
+List and open or copy your Dropbox Paper documents.
+
+![](./images/image.png)
 
 ## Requirement
 
@@ -17,10 +19,26 @@ Download and double-click.
 
 ## Usage
 
+### config
+
 Register Dropbox access token. The access token saved in your "Keychain Access.app".
 
-![](./images/image2.png)
+![](./images/config.png)
 
-List your Dropbox Paper documents.
+### open
 
-![](./images/image1.png)
+Open your Dropbox Paper documents.
+
+![](./images/open.png)
+
+### copy
+
+Copy a selected document to the clipboard in Markdown format.
+
+![](./images/copy.png)
+
+### new
+
+Open Dropbox Paper top page.
+
+![](./images/new.png)
