@@ -19,26 +19,26 @@ Download and double-click.
 
 ## Usage
 
-### config
+### Config
 
 Register Dropbox access token. The access token saved in your "Keychain Access.app".
 
 ![](./images/config.png)
 
-### open
+### Open
 
 Open your Dropbox Paper documents.
 
 ![](./images/open.png)
 
-### copy
+### Copy
 
 Copy a selected document to the clipboard in Markdown format.
 
 ![](./images/copy.png)
 
-### new
+### New
 
-Open Dropbox Paper top page.
+Create a new Dropbox Paper document.
 
 ![](./images/new.png)
