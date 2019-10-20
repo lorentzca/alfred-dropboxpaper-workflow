@@ -13,7 +13,9 @@ def get_docs_list():
         'Content-Type': 'application/json',
     }
     data = {
-        'limit': 1000
+        'limit': 1000,
+        'sort_by': "modified",
+        "sort_order": "descending",
     }
 
     req = urllib.request.Request(
