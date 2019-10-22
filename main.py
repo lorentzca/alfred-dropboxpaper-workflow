@@ -23,44 +23,41 @@ def get_docs_list():
     with urllib.request.urlopen(req) as response:
         body = json.load(response)
 
-    return body
+    return body['doc_ids']
 
-def get_title_list(docs_list):
+def get_doc_title_and_id(doc_id):
     path = '/2/paper/docs/download'
     url = endpoint + path
 
-    title_list = []
-    for doc_id in docs_list['doc_ids']:
-        headers = {
-            'Authorization': 'Bearer ' + token,
-            'Dropbox-API-Arg': '{"doc_id":"%s","export_format":{".tag":"markdown"}}' % doc_id,
-        }
+    headers = {
+        'Authorization': 'Bearer ' + token,
+        'Dropbox-API-Arg': '{"doc_id":"%s","export_format":{".tag":"markdown"}}' % doc_id,
+    }
 
-        req = urllib.request.Request(url, headers = headers)
-        with urllib.request.urlopen(req) as response:
-            body = response.read().decode('utf-8')
+    req = urllib.request.Request(url, headers = headers)
+    with urllib.request.urlopen(req) as response:
+        body = response.read().decode('utf-8')
 
-        title = {'title': body.splitlines()[0].lstrip('# '), 'doc_id': doc_id}
-        title_list.append(title)
+    doc_title_and_id = {'title': body.splitlines()[0].lstrip('# '), 'doc_id': doc_id}
 
-    return title_list
+    return doc_title_and_id
 
-def alfred_items(title_list):
+def alfred_items(docs_list):
     item_list = []
     items = {'items': item_list}
 
-    for tl in title_list:
-        doc_url = 'https://paper.dropbox.com/doc/%s' % tl['doc_id']
-        item = {'title': tl['title'], 'arg': doc_url}
+    for d in docs_list:
+        doc_title = get_doc_title_and_id(d)
+        doc_url = 'https://paper.dropbox.com/doc/%s' % d
+        item = {'title': doc_title, 'arg': doc_url}
         item_list.append(item)
 
     return items
 
 def main():
-    d = get_docs_list()
-    t = get_title_list(d)
-    a = alfred_items(t)
+    docs = get_docs_list()
+    items = alfred_items(docs)
 
-    print(json.dumps(a))
+    print(json.dumps(items))
 
 main()
